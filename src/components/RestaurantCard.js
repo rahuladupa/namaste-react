@@ -1,5 +1,5 @@
 const RestaurantCard = ({ resData = {} }) => {
-  console.log(resData)
+  // console.log('resData', resData)
   const { 
     title = "Unknown", 
     category = "N/A", 

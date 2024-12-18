@@ -59,3 +59,13 @@
     .filter{
         display: flex;
     }
+    .shimmer-card{
+        width: 200px;
+        height: 400px;
+        padding: 5px;
+        margin: 15px;
+        background: url("https://via.placeholder.com/150")
+    }
+    .shimmer-container{
+        display: flex;
+    }
