@@ -2,45 +2,21 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router";
 import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState([]);
-  const { resId } = useParams();
-  console.log(resId)
+  const { resId } = useParams(); // Get the restaurant ID from the URL
+  const resInfo = useRestaurantMenu(resId); // Fetch menu data based on restaurant ID
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  console.log("Restaurant Info:", resInfo); // Debugging API response
 
-  const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    setResInfo(json);
-  };
-  console.log('resInfo', resInfo)
-
-  // const { category } = resInfo;
-
-  return resInfo === null ? (
-    <Shimmer />
+  // Safely access the data using optional chaining
+  return !resInfo ? (
+    <Shimmer /> // Show shimmer while data is loading
   ) : (
-    <div className="menu">
-      {/* Display the first product's title as the main heading */}
-      {/* <h1>{resInfo.title || "No Title"}</h1> */}
-
-      {/* Display the category name in a subheading */}
-      <h2>{resInfo.category || "No Category"}</h2>
-<ul>
-  <li>$:{resInfo.price}</li>
-  <li>{resInfo.description}</li>
-</ul>
-      {/* Map through the product list and render as <li> */}
-      {/* <ul>
-        {resInfo.map((item) => (
-          <li key={item.id}>
-            {item.title} - ${item.price}
-          </li>
-        ))}
-      </ul> */}
+    <div className="text-center">
+      <h1 className="font-bold my-7 text-2xl">Restaurant Name</h1>
+      <p className="font-semibold">Namaste Restaurant</p>
     </div>
   );
 };
